@@ -30,19 +30,15 @@
         <div class="full"><label class="label" for="blessing">祝福題贈</label><textarea id="blessing" class="field" rows="3" maxlength="120">福氣常在，財運亨通，心想事成，萬事順遂。</textarea></div>
         <div><label class="label" for="edition">Edition</label><input id="edition" class="field" value="No. 001 / 001" maxlength="32"></div>
         <div><label class="label" for="signature">落款</label><input id="signature" class="field" value="丙午年 · 2026｜Xue-Hong × AI Collaborative Art" maxlength="64"></div>
-
         <div class="full"><label class="label" for="imageInput">參考圖片（本機載入）</label><input id="imageInput" class="field" type="file" accept="image/*"><div class="label" id="imageStatus" style="margin-top:6px">尚未載入圖片。v2.1 會顯示參考圖，但目前未連接 AI Vision 後端，因此不會自動辨識圖片內容。</div></div>
         <div class="full"><label class="label" for="referenceBrief">參考圖核心主角／必須保留元素（可編輯）</label><textarea id="referenceBrief" class="field" rows="3" maxlength="240" placeholder="例：抬起右前掌的招福貓、櫻花、富士山、鳥居、金元寶、福袋與開運文字。">抬起右前掌的招福貓、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福元素。</textarea><div class="label" style="margin-top:6px">目前由您確認核心元素；未來接安全後端 Vision API 後可改成「AI 自動辨識 → 您確認再採用」。</div></div>
       </div>
-
       <div class="panel"><div class="label">選擇藝術藏品模板</div><div class="template-grid" id="templateGrid"></div></div>
       <div class="panel form-grid">
         <div><label class="label" for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境</option></select></div>
         <div><label class="label" for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
-
         <div><label class="label" for="plaquePattern">收藏銘牌格式</label><select id="plaquePattern" class="field"><option value="collection">{姓名} · 雅藏</option><option value="gift">敬贈　{姓名}</option><option value="treasure" selected>贈予{姓名} · 珍藏</option><option value="madefor">為{姓名}珍藏而作</option><option value="custom">自訂文字</option></select></div>
         <div><label class="label" for="plaqueCustom">銘牌實際文字</label><input id="plaqueCustom" class="field" value="贈予陳氏家族 · 珍藏" maxlength="48"></div>
-
         <div><label class="label" for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll" selected>卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
       </div>
       <button class="btn primary" id="toPreview">預覽我的藏品 →</button>
@@ -58,6 +54,7 @@
           <div class="base"><div class="plaque" id="plaquePreview">贈予陳氏家族 · 珍藏</div></div>
         </div>
         <div>
+          <div class="panel" id="referencePanel" hidden><div class="label">您載入的原始參考圖</div><img id="refThumb" alt="原始參考圖縮圖" style="display:block;width:100%;max-height:260px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:#050b12"></div>
           <div class="panel summary" id="summary"></div>
           <div class="panel summary" id="referenceSummary"></div>
           <button class="btn gold" id="generateBtn" style="width:100%;margin-bottom:10px">生成收藏級 AI Prompt</button>

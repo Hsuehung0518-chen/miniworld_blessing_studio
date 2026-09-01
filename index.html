@@ -1,98 +1,89 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="theme-color" content="#07111f" />
-<title>MiniWorld Blessing Studio v1.1｜瓶中祝福創作模板</title>
-<style>
-:root{--ui-scale:1;--bg:#07111f;--panel:#0c1b2d;--panel2:#10243b;--text:#f4f7fb;--muted:#9eb0c6;--line:rgba(255,255,255,.12);--accent:#78d6ff;--accent2:#d7b56d;--ok:#75e0b0;--danger:#ff9a9a;--shadow:0 18px 55px rgba(0,0,0,.28);font-family:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
-*{box-sizing:border-box} html{font-size:calc(16px * var(--ui-scale))} body{margin:0;background:radial-gradient(circle at 50% -20%,#183659 0,#07111f 45%,#050b13 100%);color:var(--text);min-height:100%;}
-button,input,select,textarea{font:inherit}.app{width:min(1120px,100%);margin:auto;padding:18px 16px 40px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(145deg,rgba(120,214,255,.18),rgba(215,181,109,.12));font-size:22px}.brand h1{font-size:clamp(18px,3vw,24px);margin:0}.brand small{color:var(--muted)}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{min-height:44px;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:rgba(255,255,255,.05);color:var(--text);cursor:pointer}.btn:hover{background:rgba(255,255,255,.09)}.btn.primary{background:linear-gradient(135deg,var(--accent),#8f88ff);color:#06111c;border:none;font-weight:800}.btn.gold{background:linear-gradient(135deg,#f0d28e,var(--accent2));color:#241b09;border:none;font-weight:800}.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(120,214,255,.48);outline-offset:2px}
-.hero{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(300px,.78fr);gap:16px;align-items:stretch}.hero>*{min-width:0}.stage,.controls,.output{min-width:0;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.025));box-shadow:var(--shadow)}.stage{padding:18px;position:relative;overflow:hidden;min-height:560px;display:flex;flex-direction:column}.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 36%,rgba(120,214,255,.13),transparent 44%);pointer-events:none}.scene-wrap{display:grid;place-items:center;flex:1;min-height:460px;position:relative}.fishbowl{position:relative;width:min(74vw,470px);aspect-ratio:1/1;border-radius:50% 50% 45% 45%;overflow:hidden;border:2px solid rgba(255,255,255,.42);box-shadow:inset 0 0 35px rgba(255,255,255,.16),0 30px 80px rgba(0,0,0,.33)}.fishbowl::after{content:"";position:absolute;inset:7% 11% auto auto;width:18%;height:48%;border-radius:50%;background:linear-gradient(110deg,rgba(255,255,255,.6),rgba(255,255,255,0));filter:blur(1px);transform:rotate(-18deg);pointer-events:none}.world{position:absolute;inset:0;background:linear-gradient(180deg,#8bd3f7 0%,#97e2ff 35%,#1f76a5 72%,#0b3756 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}.world[data-mood="aurora"]{background:radial-gradient(circle at 55% 22%,rgba(86,255,195,.34),transparent 25%),linear-gradient(180deg,#071944 0%,#0b285c 48%,#0d466d 100%)}.world[data-mood="sunset"]{background:linear-gradient(180deg,#ffd89a 0%,#ffb08b 46%,#3b7591 100%)}.world[data-mood="garden"]{background:linear-gradient(180deg,#b9e6ff 0%,#dff4c3 52%,#5fa472 100%)}.uploaded{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}.has-image .uploaded{display:block}.has-image .demo-world{opacity:0}.demo-world{position:absolute;inset:0;transition:.25s}.whale{position:absolute;left:11%;top:26%;width:78%;height:38%;border-radius:52% 58% 48% 55%;background:linear-gradient(155deg,#24577f,#0c2744);transform:rotate(12deg);box-shadow:inset 0 -18px 30px rgba(0,0,0,.25)}.whale:before{content:"";position:absolute;width:34%;height:34%;right:-14%;top:34%;background:#173d61;border-radius:50% 100% 50% 100%;transform:rotate(8deg)}.flowers{position:absolute;left:18%;top:22%;width:64%;height:18%;background:radial-gradient(circle,#ff7ca5 0 10%,transparent 11%) 0 0/30px 30px,radial-gradient(circle,#ffd16b 0 12%,transparent 13%) 12px 8px/34px 34px,radial-gradient(circle,#7ce2a2 0 11%,transparent 12%) 5px 5px/38px 38px;filter:saturate(1.15)}.ground{position:absolute;left:-10%;right:-10%;bottom:-2%;height:31%;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.24),transparent 40%),linear-gradient(#54b79d,#175963);border-radius:50% 50% 0 0}.petals{position:absolute;inset:0;background-image:radial-gradient(circle at 10% 20%,#ffc2d7 0 3px,transparent 4px),radial-gradient(circle at 75% 18%,#f4ce63 0 3px,transparent 4px),radial-gradient(circle at 44% 62%,#ff9dc0 0 3px,transparent 4px),radial-gradient(circle at 84% 48%,#b7f19b 0 3px,transparent 4px);background-size:95px 95px,120px 120px,140px 140px,115px 115px;opacity:.88}.glass-text{position:absolute;left:50%;bottom:13%;transform:translateX(-50%);width:78%;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.35)}.glass-text .main{font-size:clamp(30px,6vw,58px);font-weight:900;color:#f4d798;letter-spacing:.08em}.glass-text .sub{margin-top:6px;font-size:clamp(14px,2vw,19px);font-weight:800;line-height:1.45;color:#fff3d2;background:rgba(5,18,29,.42);padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16)}.base{width:72%;height:42px;margin:-10px auto 0;border-radius:50%;background:linear-gradient(#855932,#3a2416);box-shadow:0 8px 20px rgba(0,0,0,.4)}.stage-note{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}.controls{padding:18px}.controls h2,.output h2{margin:0 0 12px;font-size:18px}.form-group{margin-bottom:14px}.form-group label{display:block;margin-bottom:6px;font-size:13px;color:#dbe7f4}.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);color:var(--text);padding:12px;min-height:44px}.form-group textarea{min-height:84px;resize:vertical}.range-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.range-row output{color:var(--accent);font-weight:800}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{min-height:40px;padding:8px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);cursor:pointer}.chip.active{background:rgba(120,214,255,.16);border-color:rgba(120,214,255,.55)}.recipe{min-width:0;max-width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.recipe div{border:1px solid var(--line);border-radius:13px;padding:10px 8px;text-align:center;font-size:12px;color:var(--muted);background:rgba(255,255,255,.025)}.recipe b{display:block;color:var(--text);font-size:18px;margin-bottom:2px}.output{margin-top:16px;padding:18px}.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.panel{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.025)}.panel h3{margin:0 0 8px;font-size:15px}.result{white-space:pre-wrap;color:#dce7f4;line-height:1.65;font-size:14px;max-height:260px;overflow:auto}.toast{margin-top:10px;min-height:22px;color:var(--ok);font-size:13px}.file-label{display:flex;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:14px;cursor:pointer;color:#dce7f4;background:rgba(255,255,255,.035)}.file-label input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden}.footer-note{color:var(--muted);text-align:center;font-size:12px;margin-top:14px}
-@media(max-width:860px){.hero{grid-template-columns:1fr}.stage{min-height:480px}.scene-wrap{min-height:380px}.fishbowl{width:min(86vw,430px)}.output-grid{grid-template-columns:1fr}.recipe{grid-template-columns:repeat(5,minmax(64px,1fr));overflow-x:auto}.topbar{align-items:flex-start;flex-direction:column}}@media(max-width:360px){.recipe{grid-template-columns:repeat(3,1fr);overflow:visible}.fishbowl{width:min(82vw,430px)}.app{padding-left:12px;padding-right:12px}}
-@media(prefers-reduced-motion:no-preference){.fishbowl{animation:floaty 7s ease-in-out infinite}@keyframes floaty{50%{transform:translateY(-5px)}}}
-body.light{--bg:#edf3f8;--panel:#fff;--panel2:#f7fafc;--text:#172333;--muted:#64748b;--line:rgba(16,35,52,.14);--shadow:0 16px 45px rgba(30,50,70,.12);background:linear-gradient(#eef6fb,#f9fbfd)}body.light .stage,body.light .controls,body.light .output{background:rgba(255,255,255,.82)}body.light .form-group input,body.light .form-group select,body.light .form-group textarea{background:#fff;color:#172333}body.light .chip{background:#fff;color:#172333}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07101d">
+<title>AI Art Collectible Studio v2.4｜Incremental Aesthetic Tuning</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app" id="app">
-  <div class="topbar">
-    <div class="brand"><div class="logo">🫧</div><div><h1>MiniWorld Blessing Studio</h1><small>把一張祝福圖，變成可收藏的瓶中微縮世界</small></div></div>
-    <div class="top-actions"><button class="btn" id="fontBtn" type="button" aria-label="切換字體大小">Aa 標準</button><button class="btn" id="themeBtn" type="button">☀️ 明亮模式</button><a class="btn" href="guide.html" style="text-decoration:none;display:inline-flex;align-items:center">📖 操作說明</a><button class="btn" id="resetBtn" type="button">↺ 重設</button></div>
+<div class="app" id="app">
+<header class="topbar">
+  <div><div class="brand">AI Art Collectible Studio <span>v2.4</span></div><div class="muted small">私人藝術藏品工坊 · Incremental Aesthetic Tuning Edition</div></div>
+  <div class="top-actions"><button id="themeBtn" class="iconbtn" type="button" aria-label="切換明暗模式">☀︎</button><button id="fontBtn" class="iconbtn" type="button" aria-label="調整字體大小">Aa</button><button id="helpBtn" class="iconbtn" type="button" aria-label="操作指南">?</button></div>
+</header>
+
+<main>
+<section class="view active" data-view="home">
+  <div class="hero"><div class="eyebrow">MINIWORLD CREATION ROUTER</div><h1>選一條最適合你的創作路徑</h1><p>已有慣用 AI 生圖軟體，就走快速指令；需要完整題贈、Edition 與收藏身分，就走收藏級工作流。</p></div>
+  <div class="mode-grid">
+    <button class="mode-card quick" type="button" data-mode="quick"><span class="mode-icon">⚡</span><strong>我已有生圖 AI，只要快速指令</strong><small>不傳圖、不接 API。選參數 → 生成中英 Prompt → 預覽框直接修改 → 回原 AI 生成。</small></button>
+    <button class="mode-card" type="button" data-mode="full"><span class="mode-icon">🏺</span><strong>我要完整設計收藏品</strong><small>作品題名、收藏者、銘牌、卷軸、Edition、材質與完整 Prompt。</small></button>
   </div>
+  <div class="trust-row"><span>✓ 圖片留在你的 AI</span><span>✓ 無 API Key</span><span>✓ Android / iPhone 友善</span></div>
+</section>
 
-  <section class="hero">
-    <div class="stage" aria-label="沉浸式預覽舞台">
-      <div class="scene-wrap">
-        <div>
-          <div class="fishbowl" id="bowl">
-            <div class="world" id="world" data-mood="garden">
-              <img class="uploaded" id="previewImg" alt="使用者上傳的原始祝福圖預覽" />
-              <div class="demo-world" aria-hidden="true"><div class="ground"></div><div class="whale"></div><div class="flowers"></div><div class="petals"></div></div>
-              <div class="glass-text"><div class="main" id="mainPreview">日安</div><div class="sub" id="subPreview">日日常歡愉<br>事事皆順意</div></div>
-            </div>
-          </div>
-          <div class="base"></div>
-        </div>
-      </div>
-      <div class="stage-note">背景是舞台，容器世界才是主角。上傳圖片後會直接進入魚缸預覽。</div>
-    </div>
+<section class="view" data-view="quick">
+  <div class="section-head"><div><div class="eyebrow">QUICK MODE</div><h2>⚡ MiniWorld 快速指令</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="notice"><b>使用方式：</b>先在你慣用的 AI 圖像生成器上傳參考圖，再回來選必要參數。本頁只產生文字指令，不會取得、分析或上傳你的圖片。</div>
+  <div class="panel form-grid">
+    <div><label for="qTarget">目標 AI</label><select id="qTarget" class="field"><option value="universal">通用圖生圖</option><option value="chatgpt">ChatGPT Images</option><option value="gemini">Gemini Images</option><option value="midjourney">Midjourney</option><option value="ideogram">Ideogram</option><option value="flux">FLUX / ComfyUI</option><option value="custom">自訂／其他</option></select></div>
+    <div><label for="qTemplate">MiniWorld 藝術形式</label><select id="qTemplate" class="field"><option>水晶仙界藏品</option><option>軟木瓶中世界</option><option>卷軸書卷藏品</option><option>玉雕珍藏</option><option selected>琉璃宮燈世界</option><option>博物館玻璃罩</option><option>古董珠寶盒世界</option><option>時計時光藏品</option><option>東方屏風立體畫</option><option>陶瓷青花器世界</option><option>立體書 Pop-up Art</option><option>私人藝術館藏</option></select></div>
+    <div><label for="qWorld">世界觀</label><select id="qWorld" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境 × 日式開運庭園</option></select></div>
+    <div><label for="qMaterial">主材質</label><select id="qMaterial" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅 × 金箔</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
+    <div class="full"><label for="qCore">參考圖必須保留的核心元素</label><textarea id="qCore" class="field" rows="3" maxlength="320">抬起右前掌的橘白招福貓、溫柔表情、金色鈴鐺與開運吊牌、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福氛圍</textarea></div>
+    <div><label for="qTitle">作品文字</label><input id="qTitle" class="field" value="開運招福" maxlength="24"></div>
+    <div><label for="qRatio">畫面比例</label><select id="qRatio" class="field"><option value="9:16" selected>9:16 直式</option><option value="1:1">1:1 方形</option><option value="4:5">4:5 社群直式</option><option value="16:9">16:9 橫式</option></select></div>
+    <div><label for="qTextMode">中文字策略</label><select id="qTextMode" class="field"><option value="strict" selected>要求準確繁體中文</option><option value="space">保留文字牌位置，後製文字</option><option value="none">不要任何文字</option></select></div>
+    <div><label for="qStrength">轉換強度</label><select id="qStrength" class="field"><option value="faithful">高保真：主角與構圖優先</option><option value="balanced" selected>平衡：保留主角＋重構場景</option><option value="creative">創意：允許較大幅 MiniWorld 重構</option></select></div>
+  </div>
+  <div class="action-row"><button id="quickGenerate" class="btn primary" type="button">生成專用快速指令</button><button id="quickReset" class="btn" type="button">重設範例</button></div>
+  <div id="quickOutputPanel" class="panel output-panel" hidden><div class="output-head"><div><b id="adapterName">通用圖生圖</b><div class="muted small">Prompt Adapter 已套用 · 中英文皆可直接修改</div></div></div><div class="prompt-tabs" role="tablist" aria-label="提示詞語言"><button class="tab active" type="button" data-prompt-lang="zh">繁體中文</button><button class="tab" type="button" data-prompt-lang="en">English</button><button class="tab" type="button" data-prompt-lang="bi">中英對照</button></div><div id="promptZhPane" class="prompt-pane active"><label for="quickOutputZh">繁體中文提示詞｜可直接修改</label><textarea id="quickOutputZh" class="result prompt-editor" rows="16" spellcheck="false"></textarea></div><div id="promptEnPane" class="prompt-pane"><label for="quickOutputEn">English Prompt｜Editable</label><textarea id="quickOutputEn" class="result prompt-editor" rows="16" spellcheck="false"></textarea></div><div id="promptBiPane" class="prompt-pane bilingual-grid"><div><label for="quickOutputBiZh">繁體中文｜可修改</label><textarea id="quickOutputBiZh" class="result prompt-editor" rows="16" spellcheck="false"></textarea></div><div><label for="quickOutputBiEn">English｜Editable</label><textarea id="quickOutputBiEn" class="result prompt-editor" rows="16" spellcheck="false"></textarea></div></div><div class="aesthetic-panel">
+  <div class="aesthetic-head"><div><b>✨ 美學微調 Chips</b><div class="muted small">只增量補強目前 Prompt，不重寫你已手動修改的內容</div></div><button id="undoAesthetic" class="btn compact" type="button" disabled>↶ 復原上一步</button></div>
+  <div class="aesthetic-chips" id="aestheticChips">
+    <button class="a-chip" type="button" data-aesthetic="dreamy">更夢幻</button>
+    <button class="a-chip" type="button" data-aesthetic="realistic">更寫實</button>
+    <button class="a-chip" type="button" data-aesthetic="premium">更高級</button>
+    <button class="a-chip" type="button" data-aesthetic="eastern">更東方</button>
+    <button class="a-chip" type="button" data-aesthetic="miniature">更微縮</button>
+    <button class="a-chip" type="button" data-aesthetic="warm">更溫暖</button>
+    <button class="a-chip" type="button" data-aesthetic="lessText">文字更少</button>
+  </div>
+  <div class="edit-status" id="aestheticStatus">尚未套用微調。</div>
+</div><div class="action-row prompt-actions"><button id="copyCurrent" class="btn compact" type="button">⧉ 複製目前版本</button><button id="copyBilingual" class="btn compact" type="button">中英一起複製</button><button id="restoreGenerated" class="btn compact" type="button">↺ 還原生成內容</button></div><div id="editStatus" class="edit-status">✓ 生成後可直接改字；你的修改不會被自動覆蓋。</div><div id="quickHint" class="hint"></div></div>
+</section>
 
-    <aside class="controls">
-      <h2>創作設定</h2>
-      <label class="file-label">🖼️ 載入原始祝福圖<input id="imageInput" type="file" accept="image/*" /></label>
-      <div class="form-group"><label for="mainText">主祝福</label><input id="mainText" value="日安" maxlength="12" /></div>
-      <div class="form-group"><label for="subText">次祝福</label><textarea id="subText" maxlength="80">日日常歡愉\n事事皆順意</textarea></div>
-      <div class="form-group"><label for="containerType">玻璃容器</label><select id="containerType"><option>圓形魚缸</option><option>玻璃茶壺</option><option>香水瓶</option><option>實驗燒瓶</option><option>玻璃燈泡</option><option>透明寶石盒</option></select></div>
-      <div class="form-group"><label>世界氛圍</label><div class="chips" id="moodChips"><button class="chip active" type="button" data-mood="garden">🌸 花園晴空</button><button class="chip" type="button" data-mood="aurora">🌌 極光夜境</button><button class="chip" type="button" data-mood="sunset">🌅 金色夕映</button></div></div>
-      <div class="form-group"><label for="depth">微縮景深</label><div class="range-row"><input id="depth" type="range" min="1" max="5" value="4"/><output id="depthOut">4/5</output></div></div>
-      <div class="form-group"><label for="hero">靈魂主角</label><input id="hero" value="保留原圖的花鯨與小女孩" /></div>
-      <button class="btn primary" id="forgeBtn" type="button" style="width:100%">✨ 生成 Mini World 配方</button>
-      <div class="recipe" aria-label="創作公式"><div><b>①</b>原圖</div><div><b>②</b>主角</div><div><b>③</b>微縮</div><div><b>④</b>入瓶</div><div><b>⑤</b>文字實體化</div></div>
-      <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    </aside>
-  </section>
+<section class="view" data-view="full">
+  <div class="section-head"><div><div class="eyebrow">COLLECTOR MODE</div><h2>🏺 完整收藏品設計</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="panel form-grid">
+    <div><label for="title">作品題名</label><input id="title" class="field" value="開運招福" maxlength="24"></div>
+    <div><label for="recipient">收藏者／受贈者</label><input id="recipient" class="field" value="陳氏家族" maxlength="32"></div>
+    <div class="full"><label for="blessing">祝福題贈</label><textarea id="blessing" class="field" rows="3" maxlength="160">福氣常在，財運亨通，心想事成，萬事順遂。</textarea></div>
+    <div><label for="edition">Edition</label><input id="edition" class="field" value="No. 001 / 001" maxlength="32"></div>
+    <div><label for="signature">落款</label><input id="signature" class="field" value="丙午年 · 2026｜Xue-Hong × AI Collaborative Art" maxlength="72"></div>
+    <div class="full"><label for="referenceBrief">參考圖核心主角／必留元素</label><textarea id="referenceBrief" class="field" rows="3" maxlength="320">抬起右前掌的橘白招福貓、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福元素。</textarea></div>
+    <div><label for="template">藝術藏品模板</label><select id="template" class="field"><option>水晶仙界藏品</option><option>軟木瓶中世界</option><option>卷軸書卷藏品</option><option>玉雕珍藏</option><option selected>琉璃宮燈世界</option><option>博物館玻璃罩</option><option>古董珠寶盒世界</option><option>時計時光藏品</option><option>東方屏風立體畫</option><option>陶瓷青花器世界</option><option>立體書 Pop-up Art</option><option>私人藝術館藏</option></select></div>
+    <div><label for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境</option></select></div>
+    <div><label for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
+    <div><label for="plaquePattern">銘牌格式</label><select id="plaquePattern" class="field"><option value="collection">{姓名} · 雅藏</option><option value="gift">敬贈　{姓名}</option><option value="treasure" selected>贈予{姓名} · 珍藏</option><option value="madefor">為{姓名}珍藏而作</option><option value="custom">自訂文字</option></select></div>
+    <div><label for="plaqueCustom">銘牌實際文字</label><input id="plaqueCustom" class="field" value="贈予陳氏家族 · 珍藏" maxlength="56"></div>
+    <div><label for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll" selected>卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
+  </div>
+  <button id="fullGenerate" class="btn primary" type="button">生成收藏級 Prompt →</button>
+  <div id="fullOutputPanel" class="panel output-panel" hidden><div class="output-head"><b>收藏級 Prompt</b><button id="copyFull" class="btn compact" type="button">⧉ 複製</button></div><pre id="fullOutput" class="result"></pre><div class="collector-card" id="collectorCard"></div></div>
+</section>
 
-  <section class="output" aria-live="polite">
-    <h2>可直接分享／生成的成果</h2>
-    <div class="output-grid">
-      <div class="panel"><h3>AI 生圖提示詞</h3><div class="result" id="promptOut"></div><button class="btn" id="copyPromptBtn" type="button" style="margin-top:10px">⧉ 複製提示詞</button></div>
-      <div class="panel"><h3>分享文案</h3><div class="result" id="shareOut"></div><button class="btn" id="copyShareBtn" type="button" style="margin-top:10px">⧉ 複製文案</button></div>
-    </div>
-    <div class="footer-note">提示：此 HTML 可直接本機開啟，也可部署至 GitHub Pages / Netlify。｜<a href="qa_report.html" style="color:var(--accent)">查看沙盒實測報告</a></div>
-  </section>
+<section class="view" data-view="help">
+  <div class="section-head"><div><div class="eyebrow">GUIDE</div><h2>📖 全功能操作流程</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="guide-tabs"><button type="button" class="tab active" data-guide="quickGuide">⚡ 快速模式</button><button type="button" class="tab" data-guide="fullGuide">🏺 完整模式</button><a class="tab linktab" href="guide.html">獨立指南 ↗</a></div>
+  <div id="quickGuide" class="guide-page active"><div class="steps"><article><b>1</b><h3>先去你的 AI 上傳圖</h3><p>ChatGPT、Gemini、Midjourney、Ideogram、FLUX 等都可以。圖片不用上傳到本工具。</p></article><article><b>2</b><h3>選 5–7 個參數</h3><p>目標 AI、MiniWorld 形式、世界觀、材質、必留元素、文字與比例。</p></article><article><b>3</b><h3>生成並複製</h3><p>按「生成專用快速指令」，再一鍵複製。</p></article><article><b>4</b><h3>貼回原 AI</h3><p>要求該 AI 使用你已上傳的參考圖照指令重構，不需要 API。</p></article></div></div>
+  <div id="fullGuide" class="guide-page"><div class="steps"><article><b>1</b><h3>定義作品</h3><p>輸入題名、收藏者、祝福、Edition、落款與核心元素。</p></article><article><b>2</b><h3>選藏品語言</h3><p>決定模板、世界觀、材質、銘牌與題贈形式。</p></article><article><b>3</b><h3>生成收藏 Prompt</h3><p>系統會把收藏身分與視覺規格完整組合。</p></article><article><b>4</b><h3>交給你的生成模型</h3><p>若模型已有參考圖，Prompt 會要求保留主角與情緒身分。</p></article></div></div>
+  <div class="notice"><b>iPhone：</b>正式使用請用 Safari 開 HTTPS 網址；不要把聊天附件或「檔案」App 的 HTML 預覽當成 Safari 真機測試。Android 建議 Chrome。</div>
+</section>
 </main>
-<script>
-(()=>{
- const $=id=>document.getElementById(id);
- const els={app:$('app'),bowl:$('bowl'),world:$('world'),previewImg:$('previewImg'),imageInput:$('imageInput'),mainText:$('mainText'),subText:$('subText'),containerType:$('containerType'),depth:$('depth'),depthOut:$('depthOut'),hero:$('hero'),mainPreview:$('mainPreview'),subPreview:$('subPreview'),promptOut:$('promptOut'),shareOut:$('shareOut'),forgeBtn:$('forgeBtn'),themeBtn:$('themeBtn'),resetBtn:$('resetBtn'),fontBtn:$('fontBtn'),copyPromptBtn:$('copyPromptBtn'),copyShareBtn:$('copyShareBtn'),toast:$('toast'),moodChips:$('moodChips')};
- let mood='garden', objectUrl='';
- function safeText(v,fallback){v=(v||'').trim();return v||fallback}
- function updatePreview(){els.mainPreview.textContent=safeText(els.mainText.value,'祝福');els.subPreview.innerHTML=safeText(els.subText.value,'願日日安好').split(/\n+/).map(s=>s.replace(/[<>]/g,'')).join('<br>');els.depthOut.value=els.depth.value+'/5';const blur=(5-Number(els.depth.value))*.45;els.world.style.filter=blur?`contrast(1.02) saturate(1.04) blur(${blur}px)`:'contrast(1.02) saturate(1.04)';}
- function forge(){
-   const main=safeText(els.mainText.value,'祝福'), sub=safeText(els.subText.value,'願日日安好'), container=els.containerType.value, hero=safeText(els.hero.value,'保留原圖核心主角');
-   const moodLabel={garden:'明亮花園晴空、柔和水光與漂浮花瓣',aurora:'深藍星夜、天際極光、濕潤反射與電影級體積光',sunset:'金色夕照、溫暖柔光、夢幻反射與收藏級氛圍'}[mood];
-   els.promptOut.textContent=`Create a premium fine-art miniature diorama contained entirely inside a ${container}. Preserve the emotional identity of the source image and especially ${hero}. Rebuild the scene as a coherent handcrafted mini world with realistic miniature scale, layered foreground/midground/background, tiny plants, pathways, water details and collectible craftsmanship. Atmosphere: ${moodLabel}. Use tilt-shift macro photography, shallow depth of field ${els.depth.value}/5, cinematic lighting, realistic glass reflections and refraction, premium 3D collectible presentation. Integrate accurate Traditional Chinese physical 3D lettering: “${main}” and “${sub.replace(/\n/g,'，')}”. Keep the external display stage simple, low-detail and clearly distinct from the inner world. No duplicated landmarks, no competing focal point, no watermark, no logo, no garbled text, no extra limbs.`;
-   els.shareOut.textContent=`《${main}｜瓶中祝福 Mini World》\n把一張平面的祝福圖，留下最有感的主角與情緒，再重新雕成一座可收藏的玻璃微縮世界。\n\n${sub}\n\n創作公式：原始祝福圖 → 保留靈魂主角 → 場景微縮立體化 → 收進玻璃容器 → 祝福文字實體化。`;
-   els.toast.textContent='✓ 配方已更新，可直接選取文字使用。';
- }
- function setTheme(light){document.body.classList.toggle('light',light);els.themeBtn.textContent=light?'🌙 深色模式':'☀️ 明亮模式';try{localStorage.setItem('mw-theme',light?'light':'dark')}catch(e){}}
- const fontScales=[1,1.12,1.25]; let fontIndex=0;
- function setFont(i){fontIndex=(i+fontScales.length)%fontScales.length;document.documentElement.style.setProperty('--ui-scale',fontScales[fontIndex]);els.fontBtn.textContent=['Aa 標準','Aa 大字','Aa 特大'][fontIndex];try{localStorage.setItem('mw-font',String(fontIndex))}catch(e){}}
- async function copyText(text,label){let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);ok=true}}catch(e){}if(!ok){const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='absolute';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{ok=document.execCommand('copy')}catch(e){}ta.remove()}els.toast.textContent=ok?`✓ 已複製${label}。`:`無法自動複製，請長按文字選取。`;}
- try{const savedTheme=localStorage.getItem('mw-theme');if(savedTheme)setTheme(savedTheme==='light');const savedFont=Number(localStorage.getItem('mw-font'));if(Number.isInteger(savedFont)&&savedFont>=0&&savedFont<fontScales.length)setFont(savedFont)}catch(e){}
- els.imageInput.addEventListener('change',()=>{const f=els.imageInput.files&&els.imageInput.files[0];if(!f)return;if(!f.type.startsWith('image/')){els.toast.textContent='請選擇圖片檔。';return}if(f.size>12*1024*1024){els.toast.textContent='圖片請小於 12MB。';return}if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(f);els.previewImg.src=objectUrl;els.bowl.classList.add('has-image');els.toast.textContent='✓ 圖片已載入魚缸預覽。';});
- [els.mainText,els.subText,els.depth].forEach(el=>el.addEventListener('input',updatePreview));
- els.moodChips.addEventListener('click',e=>{const b=e.target.closest('button[data-mood]');if(!b)return;mood=b.dataset.mood;els.world.dataset.mood=mood;[...els.moodChips.querySelectorAll('.chip')].forEach(x=>x.classList.toggle('active',x===b));forge();});
- els.forgeBtn.addEventListener('click',forge);
- els.themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('light')));
- els.fontBtn.addEventListener('click',()=>setFont(fontIndex+1));
- els.copyPromptBtn.addEventListener('click',()=>copyText(els.promptOut.textContent,'提示詞'));
- els.copyShareBtn.addEventListener('click',()=>copyText(els.shareOut.textContent,'文案'));
- els.resetBtn.addEventListener('click',()=>{els.mainText.value='日安';els.subText.value='日日常歡愉\n事事皆順意';els.containerType.value='圓形魚缸';els.depth.value='4';els.hero.value='保留原圖的花鯨與小女孩';mood='garden';els.world.dataset.mood='garden';[...els.moodChips.querySelectorAll('.chip')].forEach(x=>x.classList.toggle('active',x.dataset.mood==='garden'));els.imageInput.value='';els.previewImg.removeAttribute('src');els.bowl.classList.remove('has-image');if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=''}updatePreview();forge();els.toast.textContent='已恢復示範設定。';});
- updatePreview();forge();
-})();
-</script>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
 </body>
 </html>

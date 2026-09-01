@@ -3,81 +3,71 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020">
-<title>AI Art Collectible Studio v2.1｜AI 私人藝術藏品工坊</title>
+<meta name="theme-color" content="#07101d">
+<title>AI Art Collectible Studio v2.2｜Prompt-only Quick Mode</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="app" id="app">
-  <header class="top"><div class="brand">AI Art Collectible Studio v2.1</div><div class="mini-actions"><button class="iconbtn" id="themeBtn" aria-label="切換明暗模式">☀︎</button><button class="iconbtn" id="fontBtn" aria-label="調整字體大小">Aa</button><button class="iconbtn" id="helpBtn" aria-label="開啟操作指南">?</button></div></header>
-
-  <main>
-    <section class="view active" id="homeView" data-view="home">
-      <div class="hero"><h1>把祝福，做成一件值得珍藏的藝術品</h1><p>從照片、祝福、故事或一個名字開始，組合器皿、世界觀、材質、題贈與收藏銘牌，生成完整的私人藝術藏品設計。</p></div>
-      <div class="entry-grid">
-        <button class="entry" data-flow="image">🖼️<strong>我要轉一張圖</strong><span>保留原圖靈魂主角，重新打造收藏級場景。</span></button>
-        <button class="entry" data-flow="gift">🎁<strong>我要做贈禮</strong><span>以受贈者、祝福與題贈文字為核心。</span></button>
-        <button class="entry" data-flow="collectible">🏺<strong>我要做藏品</strong><span>加入材質、Edition、銘牌與收藏身分。</span></button>
-        <button class="entry" data-flow="auto">✨<strong>不知道，幫我設計</strong><span>使用推薦組合快速產生完整作品方向。</span></button>
-      </div>
-    </section>
-
-    <section class="view" id="designView" data-view="design">
-      <div class="section-title"><h2>建立作品</h2><button class="back" data-back="home">← 返回</button></div>
-      <div class="panel form-grid">
-        <div><label class="label" for="title">作品題名</label><input id="title" class="field" value="開運招福" maxlength="24"></div>
-        <div><label class="label" for="recipient">收藏者／受贈者（可自由編輯）</label><input id="recipient" class="field" value="陳氏家族" maxlength="24" autocomplete="off"></div>
-        <div class="full"><label class="label" for="blessing">祝福題贈</label><textarea id="blessing" class="field" rows="3" maxlength="120">福氣常在，財運亨通，心想事成，萬事順遂。</textarea></div>
-        <div><label class="label" for="edition">Edition</label><input id="edition" class="field" value="No. 001 / 001" maxlength="32"></div>
-        <div><label class="label" for="signature">落款</label><input id="signature" class="field" value="丙午年 · 2026｜Xue-Hong × AI Collaborative Art" maxlength="64"></div>
-        <div class="full"><label class="label" for="imageInput">參考圖片（本機載入）</label><input id="imageInput" class="field" type="file" accept="image/*"><div class="label" id="imageStatus" style="margin-top:6px">尚未載入圖片。v2.1 會顯示參考圖，但目前未連接 AI Vision 後端，因此不會自動辨識圖片內容。</div></div>
-        <div class="full"><label class="label" for="referenceBrief">參考圖核心主角／必須保留元素（可編輯）</label><textarea id="referenceBrief" class="field" rows="3" maxlength="240" placeholder="例：抬起右前掌的招福貓、櫻花、富士山、鳥居、金元寶、福袋與開運文字。">抬起右前掌的招福貓、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福元素。</textarea><div class="label" style="margin-top:6px">目前由您確認核心元素；未來接安全後端 Vision API 後可改成「AI 自動辨識 → 您確認再採用」。</div></div>
-      </div>
-      <div class="panel"><div class="label">選擇藝術藏品模板</div><div class="template-grid" id="templateGrid"></div></div>
-      <div class="panel form-grid">
-        <div><label class="label" for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境</option></select></div>
-        <div><label class="label" for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
-        <div><label class="label" for="plaquePattern">收藏銘牌格式</label><select id="plaquePattern" class="field"><option value="collection">{姓名} · 雅藏</option><option value="gift">敬贈　{姓名}</option><option value="treasure" selected>贈予{姓名} · 珍藏</option><option value="madefor">為{姓名}珍藏而作</option><option value="custom">自訂文字</option></select></div>
-        <div><label class="label" for="plaqueCustom">銘牌實際文字</label><input id="plaqueCustom" class="field" value="贈予陳氏家族 · 珍藏" maxlength="48"></div>
-        <div><label class="label" for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll" selected>卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
-      </div>
-      <button class="btn primary" id="toPreview">預覽我的藏品 →</button>
-    </section>
-
-    <section class="view" id="previewView" data-view="preview">
-      <div class="section-title"><h2>作品預覽</h2><button class="back" data-back="design">← 修改</button></div>
-      <div class="preview-wrap">
-        <div class="art" aria-label="藝術藏品概念預覽">
-          <img id="photoPreview" class="photo" alt="使用者載入的參考圖片" hidden>
-          <div class="scroll on" id="scrollPreview">福氣常在　財運亨通　心想事成　萬事順遂</div>
-          <div class="orb"><div class="mountains"></div><div class="gourd"></div><div class="title-art" id="titlePreview">開運招福</div></div>
-          <div class="base"><div class="plaque" id="plaquePreview">贈予陳氏家族 · 珍藏</div></div>
-        </div>
-        <div>
-          <div class="panel" id="referencePanel" hidden><div class="label">您載入的原始參考圖</div><img id="refThumb" alt="原始參考圖縮圖" style="display:block;width:100%;max-height:260px;object-fit:contain;border-radius:12px;border:1px solid var(--line);background:#050b12"></div>
-          <div class="panel summary" id="summary"></div>
-          <div class="panel summary" id="referenceSummary"></div>
-          <button class="btn gold" id="generateBtn" style="width:100%;margin-bottom:10px">生成收藏級 AI Prompt</button>
-          <button class="btn" id="toResult" style="width:100%" disabled>查看完整成果 →</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="view" id="resultView" data-view="result">
-      <div class="section-title"><h2>完成</h2><button class="back" data-back="preview">← 返回預覽</button></div>
-      <div class="panel"><div class="label">收藏級 AI 生圖 Prompt</div><div class="result" id="promptOutput"></div><div class="mini-actions" style="margin-top:10px"><button class="btn" id="copyPrompt">複製提示詞</button><button class="btn" id="downloadJson">匯出作品 JSON</button></div></div>
-      <div class="panel"><div class="label">作品收藏卡</div><div class="result" id="cardOutput"></div><button class="btn" id="copyCard" style="margin-top:10px">複製收藏卡</button></div>
-      <div class="mini-actions"><button class="btn primary" id="newWork">建立下一件作品</button><button class="btn ghost" id="homeBtn">回首頁</button></div>
-    </section>
-
-    <section class="view" id="helpView" data-view="help">
-      <div class="section-title"><h2>全功能操作流程</h2><button class="back" data-back="home">← 返回</button></div>
-      <div class="panel"><div class="help-card"><div><b>① 選入口</b>有圖就選「我要轉一張圖」；送人選「我要做贈禮」；收藏編號選「我要做藏品」；不確定就讓系統推薦。</div><div><b>② 載入參考圖</b>圖片只在本機讀取與預覽，不會上傳到 AI。請在「核心主角」欄補上必須保留的元素。</div><div><b>③ 填作品資料</b>題名、受贈者、祝福、Edition、落款都可自由修改；收藏者不再固定。</div><div><b>④ 選藝術模板</b>12 種模板中選一種，再指定世界觀、主材質與題贈形式。</div><div><b>⑤ 設定銘牌</b>先選「{姓名} · 雅藏／敬贈／珍藏／為某人而作」，系統會依收藏者自動更新；也可直接改「銘牌實際文字」。</div><div><b>⑥ 預覽與生成</b>確認參考圖、題名、卷軸、銘牌後生成 Prompt，最後複製或匯出 JSON。</div></div></div>
-      <div class="panel"><b>iPhone 使用提醒</b><p class="summary">請以 Safari 開正式 HTTPS 網址。聊天附件或「檔案」App 的 HTML 預覽可能只顯示畫面而不完整執行 JavaScript。Android 建議 Chrome。</p></div>
-    </section>
-  </main>
+<header class="topbar">
+  <div><div class="brand">AI Art Collectible Studio <span>v2.2</span></div><div class="muted small">私人藝術藏品工坊 · Prompt-only Quick Mode Edition</div></div>
+  <div class="top-actions"><button id="themeBtn" class="iconbtn" type="button" aria-label="切換明暗模式">☀︎</button><button id="fontBtn" class="iconbtn" type="button" aria-label="調整字體大小">Aa</button><button id="helpBtn" class="iconbtn" type="button" aria-label="操作指南">?</button></div>
+</header>
+<main>
+<section class="view active" data-view="home">
+  <div class="hero"><div class="eyebrow">MINIWORLD CREATION ROUTER</div><h1>選一條最適合你的創作路徑</h1><p>已有慣用 AI 生圖軟體，就走快速指令；需要完整題贈、Edition 與收藏身分，就走收藏級工作流。</p></div>
+  <div class="mode-grid">
+    <button class="mode-card quick" type="button" data-mode="quick"><span class="mode-icon">⚡</span><strong>我已有生圖 AI，只要快速指令</strong><small>不傳圖、不接 API。選參數 → 複製 Prompt → 回原 AI 生成。</small></button>
+    <button class="mode-card" type="button" data-mode="full"><span class="mode-icon">🏺</span><strong>我要完整設計收藏品</strong><small>作品題名、收藏者、銘牌、卷軸、Edition、材質與完整 Prompt。</small></button>
+  </div>
+  <div class="trust-row"><span>✓ 圖片留在你的 AI</span><span>✓ 無 API Key</span><span>✓ Android / iPhone 友善</span></div>
+</section>
+<section class="view" data-view="quick">
+  <div class="section-head"><div><div class="eyebrow">QUICK MODE</div><h2>⚡ MiniWorld 快速指令</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="notice"><b>使用方式：</b>先在你慣用的 AI 圖像生成器上傳參考圖，再回來選必要參數。本頁只產生文字指令，不會取得、分析或上傳你的圖片。</div>
+  <div class="panel form-grid">
+    <div><label for="qTarget">目標 AI</label><select id="qTarget" class="field"><option value="universal">通用圖生圖</option><option value="chatgpt">ChatGPT Images</option><option value="gemini">Gemini Images</option><option value="midjourney">Midjourney</option><option value="ideogram">Ideogram</option><option value="flux">FLUX / ComfyUI</option><option value="custom">自訂／其他</option></select></div>
+    <div><label for="qTemplate">MiniWorld 藝術形式</label><select id="qTemplate" class="field"><option>水晶仙界藏品</option><option>軟木瓶中世界</option><option>卷軸書卷藏品</option><option>玉雕珍藏</option><option selected>琉璃宮燈世界</option><option>博物館玻璃罩</option><option>古董珠寶盒世界</option><option>時計時光藏品</option><option>東方屏風立體畫</option><option>陶瓷青花器世界</option><option>立體書 Pop-up Art</option><option>私人藝術館藏</option></select></div>
+    <div><label for="qWorld">世界觀</label><select id="qWorld" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境 × 日式開運庭園</option></select></div>
+    <div><label for="qMaterial">主材質</label><select id="qMaterial" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅 × 金箔</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
+    <div class="full"><label for="qCore">參考圖必須保留的核心元素</label><textarea id="qCore" class="field" rows="3" maxlength="320">抬起右前掌的橘白招福貓、溫柔表情、金色鈴鐺與開運吊牌、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福氛圍</textarea></div>
+    <div><label for="qTitle">作品文字</label><input id="qTitle" class="field" value="開運招福" maxlength="24"></div>
+    <div><label for="qRatio">畫面比例</label><select id="qRatio" class="field"><option value="9:16" selected>9:16 直式</option><option value="1:1">1:1 方形</option><option value="4:5">4:5 社群直式</option><option value="16:9">16:9 橫式</option></select></div>
+    <div><label for="qTextMode">中文字策略</label><select id="qTextMode" class="field"><option value="strict" selected>要求準確繁體中文</option><option value="space">保留文字牌位置，後製文字</option><option value="none">不要任何文字</option></select></div>
+    <div><label for="qStrength">轉換強度</label><select id="qStrength" class="field"><option value="faithful">高保真：主角與構圖優先</option><option value="balanced" selected>平衡：保留主角＋重構場景</option><option value="creative">創意：允許較大幅 MiniWorld 重構</option></select></div>
+  </div>
+  <div class="action-row"><button id="quickGenerate" class="btn primary" type="button">生成專用快速指令</button><button id="quickReset" class="btn" type="button">重設範例</button></div>
+  <div id="quickOutputPanel" class="panel output-panel" hidden><div class="output-head"><div><b id="adapterName">通用圖生圖</b><div class="muted small">Prompt Adapter 已套用</div></div><button id="copyQuick" class="btn compact" type="button">⧉ 複製指令</button></div><pre id="quickOutput" class="result"></pre><div id="quickHint" class="hint"></div></div>
+</section>
+<section class="view" data-view="full">
+  <div class="section-head"><div><div class="eyebrow">COLLECTOR MODE</div><h2>🏺 完整收藏品設計</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="panel form-grid">
+    <div><label for="title">作品題名</label><input id="title" class="field" value="開運招福" maxlength="24"></div>
+    <div><label for="recipient">收藏者／受贈者</label><input id="recipient" class="field" value="陳氏家族" maxlength="32"></div>
+    <div class="full"><label for="blessing">祝福題贈</label><textarea id="blessing" class="field" rows="3" maxlength="160">福氣常在，財運亨通，心想事成，萬事順遂。</textarea></div>
+    <div><label for="edition">Edition</label><input id="edition" class="field" value="No. 001 / 001" maxlength="32"></div>
+    <div><label for="signature">落款</label><input id="signature" class="field" value="丙午年 · 2026｜Xue-Hong × AI Collaborative Art" maxlength="72"></div>
+    <div class="full"><label for="referenceBrief">參考圖核心主角／必留元素</label><textarea id="referenceBrief" class="field" rows="3" maxlength="320">抬起右前掌的橘白招福貓、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福元素。</textarea></div>
+    <div><label for="template">藝術藏品模板</label><select id="template" class="field"><option>水晶仙界藏品</option><option>軟木瓶中世界</option><option>卷軸書卷藏品</option><option>玉雕珍藏</option><option selected>琉璃宮燈世界</option><option>博物館玻璃罩</option><option>古董珠寶盒世界</option><option>時計時光藏品</option><option>東方屏風立體畫</option><option>陶瓷青花器世界</option><option>立體書 Pop-up Art</option><option>私人藝術館藏</option></select></div>
+    <div><label for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境</option></select></div>
+    <div><label for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
+    <div><label for="plaquePattern">銘牌格式</label><select id="plaquePattern" class="field"><option value="collection">{姓名} · 雅藏</option><option value="gift">敬贈　{姓名}</option><option value="treasure" selected>贈予{姓名} · 珍藏</option><option value="madefor">為{姓名}珍藏而作</option><option value="custom">自訂文字</option></select></div>
+    <div><label for="plaqueCustom">銘牌實際文字</label><input id="plaqueCustom" class="field" value="贈予陳氏家族 · 珍藏" maxlength="56"></div>
+    <div><label for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll" selected>卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
+  </div>
+  <button id="fullGenerate" class="btn primary" type="button">生成收藏級 Prompt →</button>
+  <div id="fullOutputPanel" class="panel output-panel" hidden><div class="output-head"><b>收藏級 Prompt</b><button id="copyFull" class="btn compact" type="button">⧉ 複製</button></div><pre id="fullOutput" class="result"></pre><div class="collector-card" id="collectorCard"></div></div>
+</section>
+<section class="view" data-view="help">
+  <div class="section-head"><div><div class="eyebrow">GUIDE</div><h2>📖 全功能操作流程</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+  <div class="guide-tabs"><button type="button" class="tab active" data-guide="quickGuide">⚡ 快速模式</button><button type="button" class="tab" data-guide="fullGuide">🏺 完整模式</button><a class="tab linktab" href="guide.html">獨立指南 ↗</a></div>
+  <div id="quickGuide" class="guide-page active"><div class="steps"><article><b>1</b><h3>先去你的 AI 上傳圖</h3><p>ChatGPT、Gemini、Midjourney、Ideogram、FLUX 等都可以。圖片不用上傳到本工具。</p></article><article><b>2</b><h3>選 5–7 個參數</h3><p>目標 AI、MiniWorld 形式、世界觀、材質、必留元素、文字與比例。</p></article><article><b>3</b><h3>生成並複製</h3><p>按「生成專用快速指令」，再一鍵複製。</p></article><article><b>4</b><h3>貼回原 AI</h3><p>要求該 AI 使用你已上傳的參考圖照指令重構，不需要 API。</p></article></div></div>
+  <div id="fullGuide" class="guide-page"><div class="steps"><article><b>1</b><h3>定義作品</h3><p>輸入題名、收藏者、祝福、Edition、落款與核心元素。</p></article><article><b>2</b><h3>選藏品語言</h3><p>決定模板、世界觀、材質、銘牌與題贈形式。</p></article><article><b>3</b><h3>生成收藏 Prompt</h3><p>系統會把收藏身分與視覺規格完整組合。</p></article><article><b>4</b><h3>交給你的生成模型</h3><p>若模型已有參考圖，Prompt 會要求保留主角與情緒身分。</p></article></div></div>
+  <div class="notice"><b>iPhone：</b>正式使用請用 Safari 開 HTTPS 網址；不要把聊天附件或「檔案」App 的 HTML 預覽當成 Safari 真機測試。Android 建議 Chrome。</div>
+</section>
+</main>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script src="app.js" defer></script>
 </body>
 </html>

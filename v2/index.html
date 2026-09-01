@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1020">
-<title>AI Art Collectible Studio v2｜AI 私人藝術藏品工坊</title>
+<title>AI Art Collectible Studio v2.1｜AI 私人藝術藏品工坊</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="app" id="app">
-  <header class="top"><div class="brand">AI Art Collectible Studio v2</div><div class="mini-actions"><button class="iconbtn" id="themeBtn" aria-label="切換明暗模式">☀︎</button><button class="iconbtn" id="fontBtn" aria-label="調整字體大小">Aa</button><button class="iconbtn" id="helpBtn" aria-label="開啟操作指南">?</button></div></header>
+  <header class="top"><div class="brand">AI Art Collectible Studio v2.1</div><div class="mini-actions"><button class="iconbtn" id="themeBtn" aria-label="切換明暗模式">☀︎</button><button class="iconbtn" id="fontBtn" aria-label="調整字體大小">Aa</button><button class="iconbtn" id="helpBtn" aria-label="開啟操作指南">?</button></div></header>
 
   <main>
     <section class="view active" id="homeView" data-view="home">
@@ -25,19 +25,25 @@
     <section class="view" id="designView" data-view="design">
       <div class="section-title"><h2>建立作品</h2><button class="back" data-back="home">← 返回</button></div>
       <div class="panel form-grid">
-        <div><label class="label" for="title">作品題名</label><input id="title" class="field" value="福祿雙全" maxlength="24"></div>
-        <div><label class="label" for="recipient">收藏者／受贈者</label><input id="recipient" class="field" value="瓊美姐" maxlength="24"></div>
+        <div><label class="label" for="title">作品題名</label><input id="title" class="field" value="開運招福" maxlength="24"></div>
+        <div><label class="label" for="recipient">收藏者／受贈者（可自由編輯）</label><input id="recipient" class="field" value="陳氏家族" maxlength="24" autocomplete="off"></div>
         <div class="full"><label class="label" for="blessing">祝福題贈</label><textarea id="blessing" class="field" rows="3" maxlength="120">福氣常在，財運亨通，心想事成，萬事順遂。</textarea></div>
         <div><label class="label" for="edition">Edition</label><input id="edition" class="field" value="No. 001 / 001" maxlength="32"></div>
         <div><label class="label" for="signature">落款</label><input id="signature" class="field" value="丙午年 · 2026｜Xue-Hong × AI Collaborative Art" maxlength="64"></div>
-        <div class="full"><label class="label" for="imageInput">參考圖片（可選）</label><input id="imageInput" class="field" type="file" accept="image/*"><div class="label" id="imageStatus" style="margin-top:6px">尚未載入圖片</div></div>
+
+        <div class="full"><label class="label" for="imageInput">參考圖片（本機載入）</label><input id="imageInput" class="field" type="file" accept="image/*"><div class="label" id="imageStatus" style="margin-top:6px">尚未載入圖片。v2.1 會顯示參考圖，但目前未連接 AI Vision 後端，因此不會自動辨識圖片內容。</div></div>
+        <div class="full"><label class="label" for="referenceBrief">參考圖核心主角／必須保留元素（可編輯）</label><textarea id="referenceBrief" class="field" rows="3" maxlength="240" placeholder="例：抬起右前掌的招福貓、櫻花、富士山、鳥居、金元寶、福袋與開運文字。">抬起右前掌的招福貓、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福元素。</textarea><div class="label" style="margin-top:6px">目前由您確認核心元素；未來接安全後端 Vision API 後可改成「AI 自動辨識 → 您確認再採用」。</div></div>
       </div>
+
       <div class="panel"><div class="label">選擇藝術藏品模板</div><div class="template-grid" id="templateGrid"></div></div>
       <div class="panel form-grid">
-        <div><label class="label" for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option>未來光境</option></select></div>
-        <div><label class="label" for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
-        <div><label class="label" for="plaqueStyle">收藏銘牌</label><select id="plaqueStyle" class="field"><option>瓊美姐 · 雅藏</option><option>敬贈　瓊美姐</option><option>瓊美姐 · 珍藏</option><option>為瓊美姐珍藏而作</option></select></div>
-        <div><label class="label" for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll">卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
+        <div><label class="label" for="world">世界觀</label><select id="world" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境</option></select></div>
+        <div><label class="label" for="material">主材質</label><select id="material" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
+
+        <div><label class="label" for="plaquePattern">收藏銘牌格式</label><select id="plaquePattern" class="field"><option value="collection">{姓名} · 雅藏</option><option value="gift">敬贈　{姓名}</option><option value="treasure" selected>贈予{姓名} · 珍藏</option><option value="madefor">為{姓名}珍藏而作</option><option value="custom">自訂文字</option></select></div>
+        <div><label class="label" for="plaqueCustom">銘牌實際文字</label><input id="plaqueCustom" class="field" value="贈予陳氏家族 · 珍藏" maxlength="48"></div>
+
+        <div><label class="label" for="scrollMode">題贈形式</label><select id="scrollMode" class="field"><option value="scroll" selected>卷軸書卷式</option><option value="plaque">經典牌匾式</option><option value="crystal">水晶蝕刻式</option><option value="relief">立體浮雕式</option></select></div>
       </div>
       <button class="btn primary" id="toPreview">預覽我的藏品 →</button>
     </section>
@@ -46,13 +52,14 @@
       <div class="section-title"><h2>作品預覽</h2><button class="back" data-back="design">← 修改</button></div>
       <div class="preview-wrap">
         <div class="art" aria-label="藝術藏品概念預覽">
-          <img id="photoPreview" class="photo" alt="參考圖片預覽" hidden>
+          <img id="photoPreview" class="photo" alt="使用者載入的參考圖片" hidden>
           <div class="scroll on" id="scrollPreview">福氣常在　財運亨通　心想事成　萬事順遂</div>
-          <div class="orb"><div class="mountains"></div><div class="gourd"></div><div class="title-art" id="titlePreview">福祿雙全</div></div>
-          <div class="base"><div class="plaque" id="plaquePreview">瓊美姐 · 雅藏</div></div>
+          <div class="orb"><div class="mountains"></div><div class="gourd"></div><div class="title-art" id="titlePreview">開運招福</div></div>
+          <div class="base"><div class="plaque" id="plaquePreview">贈予陳氏家族 · 珍藏</div></div>
         </div>
         <div>
           <div class="panel summary" id="summary"></div>
+          <div class="panel summary" id="referenceSummary"></div>
           <button class="btn gold" id="generateBtn" style="width:100%;margin-bottom:10px">生成收藏級 AI Prompt</button>
           <button class="btn" id="toResult" style="width:100%" disabled>查看完整成果 →</button>
         </div>
@@ -68,8 +75,8 @@
 
     <section class="view" id="helpView" data-view="help">
       <div class="section-title"><h2>全功能操作流程</h2><button class="back" data-back="home">← 返回</button></div>
-      <div class="panel"><div class="help-card"><div><b>① 選入口</b>有圖就選「我要轉一張圖」；送人選「我要做贈禮」；收藏編號選「我要做藏品」；不確定就讓系統推薦。</div><div><b>② 填作品資料</b>輸入題名、受贈者、祝福、Edition 與落款。參考圖不是必填。</div><div><b>③ 選藝術模板</b>12 種模板中選一種；再指定世界觀、主材質、銘牌與題贈形式。</div><div><b>④ 預覽</b>確認球內題名、卷軸、底座銘牌與視覺層級。若不合適按「修改」。</div><div><b>⑤ 生成</b>按「生成收藏級 AI Prompt」；成功後才能進入成果頁。</div><div><b>⑥ 分享／保存</b>可複製 Prompt、複製收藏卡、匯出 JSON，日後可作為作品紀錄。</div></div></div>
-      <div class="panel"><b>iPhone 使用提醒</b><p class="summary">若從聊天附件或「檔案」App 預覽 HTML，可能只能看到畫面但 JavaScript 不執行。正式使用請以 Safari 開啟 HTTPS 部署網址。Android 建議使用 Chrome。</p></div>
+      <div class="panel"><div class="help-card"><div><b>① 選入口</b>有圖就選「我要轉一張圖」；送人選「我要做贈禮」；收藏編號選「我要做藏品」；不確定就讓系統推薦。</div><div><b>② 載入參考圖</b>圖片只在本機讀取與預覽，不會上傳到 AI。請在「核心主角」欄補上必須保留的元素。</div><div><b>③ 填作品資料</b>題名、受贈者、祝福、Edition、落款都可自由修改；收藏者不再固定。</div><div><b>④ 選藝術模板</b>12 種模板中選一種，再指定世界觀、主材質與題贈形式。</div><div><b>⑤ 設定銘牌</b>先選「{姓名} · 雅藏／敬贈／珍藏／為某人而作」，系統會依收藏者自動更新；也可直接改「銘牌實際文字」。</div><div><b>⑥ 預覽與生成</b>確認參考圖、題名、卷軸、銘牌後生成 Prompt，最後複製或匯出 JSON。</div></div></div>
+      <div class="panel"><b>iPhone 使用提醒</b><p class="summary">請以 Safari 開正式 HTTPS 網址。聊天附件或「檔案」App 的 HTML 預覽可能只顯示畫面而不完整執行 JavaScript。Android 建議 Chrome。</p></div>
     </section>
   </main>
 </div>

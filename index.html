@@ -21,6 +21,7 @@
     <button class="mode-card quick" type="button" data-mode="quick"><span class="mode-icon">⚡</span><strong>我已有生圖 AI，只要快速指令</strong><small>不傳圖、不接 API。選參數 → 生成中英 Prompt → 預覽框直接修改 → 回原 AI 生成。</small></button>
     <button class="mode-card" type="button" data-mode="full"><span class="mode-icon">🏺</span><strong>我要完整設計收藏品</strong><small>作品題名、收藏者、銘牌、卷軸、Edition、材質與完整 Prompt。</small></button>
   </div>
+  <div class="action-row" style="justify-content:center"><button class="btn" type="button" data-go="records">作品紀錄</button></div>
   <div class="trust-row"><span>✓ 圖片留在你的 AI</span><span>✓ 無 API Key</span><span>✓ Android / iPhone 友善</span></div>
 </section>
 
@@ -28,13 +29,13 @@
   <div class="section-head"><div><div class="eyebrow">QUICK MODE</div><h2>⚡ MiniWorld 快速指令</h2></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
   <div class="notice"><b>使用方式：</b>先在你慣用的 AI 圖像生成器上傳參考圖，再回來選必要參數。本頁只產生文字指令，不會取得、分析或上傳你的圖片。</div>
   <div class="panel form-grid">
-    <div><label for="qTarget">目標 AI</label><select id="qTarget" class="field"><option value="universal">通用圖生圖</option><option value="chatgpt">ChatGPT Images</option><option value="gemini">Gemini Images</option><option value="midjourney">Midjourney</option><option value="ideogram">Ideogram</option><option value="flux">FLUX / ComfyUI</option><option value="custom">自訂／其他</option></select></div>
+    <div><label for="qTarget">目標 AI</label><select id="qTarget" class="field"><option value="universal">通用圖生圖</option><option value="chatgpt">ChatGPT Images</option><option value="copilot">Microsoft Copilot</option><option value="gemini">Gemini Images</option><option value="midjourney">Midjourney</option><option value="ideogram">Ideogram</option><option value="flux">FLUX / ComfyUI</option><option value="custom">自訂／其他</option></select></div>
     <div><label for="qTemplate">MiniWorld 藝術形式</label><select id="qTemplate" class="field"><option>水晶仙界藏品</option><option>軟木瓶中世界</option><option>卷軸書卷藏品</option><option>玉雕珍藏</option><option selected>琉璃宮燈世界</option><option>博物館玻璃罩</option><option>古董珠寶盒世界</option><option>時計時光藏品</option><option>東方屏風立體畫</option><option>陶瓷青花器世界</option><option>立體書 Pop-up Art</option><option>私人藝術館藏</option></select></div>
     <div><label for="qWorld">世界觀</label><select id="qWorld" class="field"><option>東方仙界</option><option>星河夢境</option><option>花園秘境</option><option>古城山水</option><option>森林精靈界</option><option selected>未來光境 × 日式開運庭園</option></select></div>
     <div><label for="qMaterial">主材質</label><select id="qMaterial" class="field"><option>水晶玻璃 × 深色木雕 × 金色鑲邊</option><option>翡翠玉雕 × 金絲嵌飾</option><option selected>琉璃 × 黃銅 × 金箔</option><option>青花瓷 × 胡桃木</option><option>透明樹脂 × 金屬銘牌</option></select></div>
     <div class="full"><label for="qCore">參考圖必須保留的核心元素</label><textarea id="qCore" class="field" rows="3" maxlength="320">抬起右前掌的橘白招福貓、溫柔表情、金色鈴鐺與開運吊牌、粉色櫻花、富士山、紅色鳥居、金元寶、福袋、金幣與開運招福氛圍</textarea></div>
     <div><label for="qTitle">作品文字</label><input id="qTitle" class="field" value="開運招福" maxlength="24"></div>
-    <div><label for="qRatio">畫面比例</label><select id="qRatio" class="field"><option value="9:16" selected>9:16 直式</option><option value="1:1">1:1 方形</option><option value="4:5">4:5 社群直式</option><option value="16:9">16:9 橫式</option></select></div>
+    <div><label for="qRatio">畫面比例</label><select id="qRatio" class="field"><option value="9:16" selected>9:16 直式</option><option value="4:3">4:3 橫式</option><option value="3:4">3:4 直式</option><option value="1:1">1:1 方形</option><option value="4:5">4:5 社群直式</option><option value="16:9">16:9 橫式</option></select></div>
     <div><label for="qTextMode">中文字策略</label><select id="qTextMode" class="field"><option value="strict" selected>要求準確繁體中文</option><option value="space">保留文字牌位置，後製文字</option><option value="none">不要任何文字</option></select></div>
     <div><label for="qStrength">轉換強度</label><select id="qStrength" class="field"><option value="faithful">高保真：主角與構圖優先</option><option value="balanced" selected>平衡：保留主角＋重構場景</option><option value="creative">創意：允許較大幅 MiniWorld 重構</option></select></div>
   </div>
@@ -51,7 +52,7 @@
     <button class="a-chip" type="button" data-aesthetic="lessText">文字更少</button>
   </div>
   <div class="edit-status" id="aestheticStatus">尚未套用微調。</div>
-</div><div class="action-row prompt-actions"><button id="copyCurrent" class="btn compact" type="button">⧉ 複製目前版本</button><button id="copyBilingual" class="btn compact" type="button">中英一起複製</button><button id="restoreGenerated" class="btn compact" type="button">↺ 還原生成內容</button></div><div id="editStatus" class="edit-status">✓ 生成後可直接改字；你的修改不會被自動覆蓋。</div><div id="quickHint" class="hint"></div></div>
+</div><div class="action-row prompt-actions"><button id="copyCurrent" class="btn compact" type="button">⧉ 複製目前版本</button><button id="copyBilingual" class="btn compact" type="button">中英一起複製</button><button id="syncZhMaster" class="btn compact" type="button">以中文為主稿</button><button id="syncEnMaster" class="btn compact" type="button">以英文為主稿</button><button id="restoreGenerated" class="btn compact" type="button">↺ 還原生成內容</button></div><div id="editStatus" class="edit-status">✓ 生成後可直接改字；你的修改不會被自動覆蓋。</div><div id="quickHint" class="hint"></div></div>
 </section>
 
 <section class="view" data-view="full">
@@ -81,9 +82,42 @@
   <div id="fullGuide" class="guide-page"><div class="steps"><article><b>1</b><h3>定義作品</h3><p>輸入題名、收藏者、祝福、Edition、落款與核心元素。</p></article><article><b>2</b><h3>選藏品語言</h3><p>決定模板、世界觀、材質、銘牌與題贈形式。</p></article><article><b>3</b><h3>生成收藏 Prompt</h3><p>系統會把收藏身分與視覺規格完整組合。</p></article><article><b>4</b><h3>交給你的生成模型</h3><p>若模型已有參考圖，Prompt 會要求保留主角與情緒身分。</p></article></div></div>
   <div class="notice"><b>iPhone：</b>正式使用請用 Safari 開 HTTPS 網址；不要把聊天附件或「檔案」App 的 HTML 預覽當成 Safari 真機測試。Android 建議 Chrome。</div>
 </section>
+<section class="view" data-view="records" aria-labelledby="recordsTitle">
+<div class="section-head"><div><h2 id="recordsTitle">作品紀錄</h2><p class="muted">找成果、看進度、補缺項</p></div><button class="backbtn" type="button" data-go="home">← 首頁</button></div>
+<p class="notice">紀錄只存在這個瀏覽器，不會自動同步。請匯出備份；媒體檔案仍放在你自己的保存位置。</p>
+<p id="ledgerStatus" role="status" aria-live="polite"></p>
+<div class="action-row"><button id="newProject" class="btn primary" type="button">新增作品</button><button id="demoProject" class="btn" type="button">載入示範</button><button id="exportLedger" class="btn" type="button">匯出備份</button><button id="importLedger" class="btn" type="button">匯入備份</button><input id="ledgerFile" type="file" accept="application/json,.json" hidden></div>
+<div class="panel form-grid"><div><label for="projectSearch">搜尋作品</label><input id="projectSearch" class="field" type="search" placeholder="名稱、缺項或下一步"></div><div><label for="projectFilter">狀態</label><select id="projectFilter" class="field"><option value="">全部</option></select></div></div>
+<div id="projectList" class="record-grid"></div>
+<section id="projectEditor" class="panel" hidden aria-labelledby="editorTitle">
+<h3 id="editorTitle">編輯作品</h3><p id="projectIdentity" class="muted small"></p>
+<form id="projectForm">
+<div class="form-grid">
+<div><label for="recordName">作品名稱</label><input id="recordName" class="field" maxlength="120" required></div>
+<div><label for="recordStage">目前階段</label><select id="recordStage" class="field"></select></div>
+<div><label for="recordStatus">工作狀態</label><select id="recordStatus" class="field"></select></div>
+<div><label for="recordChecked">實際查核日期</label><input id="recordChecked" type="date" class="field"></div>
+<div class="full"><label for="recordPrompt">實際採用的提示詞</label><textarea id="recordPrompt" class="field" rows="5" maxlength="2000"></textarea></div>
+<div class="full"><label for="recordSettings">生成設定</label><textarea id="recordSettings" class="field" rows="2" maxlength="2000" placeholder="平台、模型（未知留空）、比例、秒數、額度"></textarea></div>
+<div class="full"><label for="recordTextStrategy">文字處理方式</label><textarea id="recordTextStrategy" class="field" rows="2" maxlength="2000"></textarea></div>
+<div><label for="recordMissing">仍缺少什麼</label><textarea id="recordMissing" class="field" rows="2" maxlength="2000"></textarea></div>
+<div><label for="recordNext">下一步</label><textarea id="recordNext" class="field" rows="2" maxlength="2000"></textarea></div>
+<div><label for="recordHold">暫掛原因</label><textarea id="recordHold" class="field" rows="2" maxlength="2000"></textarea></div>
+<div><label for="recordNotes">備註／停用方法</label><textarea id="recordNotes" class="field" rows="2" maxlength="2000"></textarea></div>
+</div>
+<h3>素材與成果</h3><p class="muted small">填保存位置或網址。勾選「檔案已查核」只代表你確實查過，系統不會自動驗證遠端檔案。</p><div id="recordAssets"></div><button id="addAsset" class="btn" type="button">新增素材</button>
+<h3>驗收證據</h3><p class="muted small">工作狀態與證據程度分開記錄。私人對話可填保存位置，不需公開內容。</p><div id="recordEvidence"></div><button id="addEvidence" class="btn" type="button">新增驗收</button>
+<div class="action-row"><button class="btn primary" type="submit">儲存紀錄</button><button id="cancelRecord" class="btn" type="button">關閉</button><button id="deleteRecord" class="btn" type="button">刪除此紀錄</button></div>
+<p id="recordError" role="alert"></p>
+</form></section>
+<section class="panel"><h3>創作配方</h3><p class="muted small">在快速模式完成編輯後，回到這裡保存。參數與中英文原稿都會一併備份。</p><button id="saveRecipe" class="btn" type="button">保存目前配方</button><div id="recordRecipes"></div></section>
+<dialog id="importDialog" aria-labelledby="importTitle"><h3 id="importTitle">確認匯入</h3><p id="importSummary"></p><label for="importMode">處理方式</label><select id="importMode" class="field"><option value="merge">合併：相同編號保留目前資料</option><option value="replace">取代：使用匯入資料</option></select><p class="small">匯入前先下載目前備份，確認已保存後再繼續。</p><button id="backupBeforeImport" class="btn" type="button">下載目前備份</button><label class="check-line"><input id="backupConfirmed" type="checkbox">我已保存目前備份</label><div class="action-row"><button id="applyImport" class="btn primary" type="button">確認匯入</button><button id="cancelImport" class="btn" type="button">取消</button></div><p id="importError" role="alert"></p></dialog>
+</section>
 </main>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script src="app.js" defer></script>
+<script src="ledger-core.js" defer></script>
+<script src="ledger.js" defer></script>
 </body>
 </html>

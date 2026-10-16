@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-16T02:05:57.685Z",
+  "exportedAt": null,
+  "projects": [
+    {
+      "id": "mw-demo-001",
+      "name": "夢喵・匿名示範",
+      "stage": "交付",
+      "status": "待盤點",
+      "prompt": "",
+      "settings": "歷史紀錄：Grok 圖片設為「循環」、約6秒、4:3；實際模型與扣額度未記錄。",
+      "textStrategy": "依生成結果判斷：正確原字保留；必要才修字。此歷史定稿保留生成文字。",
+      "next": "匯入自己的素材位置與驗收紀錄",
+      "missing": "此為匿名示範，未包含私人媒體、提示詞原稿或對話證據。",
+      "holdReason": "",
+      "notes": "曾確認可愛與可透過 LINE 分享；此描述不是收件端技術驗證。跨母圖移植眼部動態失敗，不再採用。",
+      "createdAt": "2026-10-16T02:05:57.685Z",
+      "updatedAt": "2026-10-16T02:05:57.686Z",
+      "checkedAt": ""
+    }
+  ],
+  "assets": [
+    {
+      "id": "dec873eb-d80b-4f57-b48e-87ce06b9c2aa",
+      "projectId": "mw-demo-001",
+      "kind": "母圖",
+      "name": "居家背景母圖",
+      "version": "歷史採用版，待查核",
+      "location": "",
+      "url": "",
+      "verified": false
+    },
+    {
+      "id": "a08eb26d-aa0e-446e-b53e-9f4a9e7bde02",
+      "projectId": "mw-demo-001",
+      "kind": "原始MP4",
+      "name": "1000015353.mp4",
+      "version": "歷史採用版，待查核",
+      "location": "",
+      "url": "",
+      "verified": false
+    },
+    {
+      "id": "c373269f-e9cd-41f0-9c13-83c4a0500643",
+      "projectId": "mw-demo-001",
+      "kind": "定稿GIF",
+      "name": "Mengmiao_Coin_Gift.gif",
+      "version": "歷史採用版，待查核",
+      "location": "",
+      "url": "",
+      "verified": false
+    }
+  ],
+  "evidence": [],
+  "recipes": []
+}

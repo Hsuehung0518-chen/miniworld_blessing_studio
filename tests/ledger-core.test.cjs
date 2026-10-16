@@ -1,0 +1,16 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),C=require('../ledger-core.js');
+const clone=x=>JSON.parse(JSON.stringify(x));
+test('sample remains pending, preserving missing evidence',()=>{const d=C.validate(C.sample());assert.equal(d.projects[0].status,'待盤點');assert.equal(C.deliveryGaps(d,d.projects[0].id).length,4);});
+test('backup roundtrip preserves project/assets/evidence/recipe semantics',()=>{const d=C.sample();d.evidence.push({id:'e1',projectId:d.projects[0].id,item:'觀賞',level:'使用者驗收',by:'使用者',date:'2026-10-15',location:'私人紀錄',url:'',note:'回報',passed:true});d.recipes.push({id:'r1',name:'配方',fields:{qTitle:'瓊',quickOutputEn:'user original'}});assert.deepEqual(C.parse(JSON.stringify(d)),d);});
+test('duplicate IDs within a file rejected',()=>{const d=C.sample();d.assets.push(clone(d.assets[0]));assert.throws(()=>C.validate(d),/重複/);});
+test('unknown versions and wrong top-level shapes rejected',()=>{assert.throws(()=>C.parse('[]'));assert.throws(()=>C.parse('null'));assert.throws(()=>C.parse('{"schemaVersion":2}'),/版本/);assert.throws(()=>C.parse('{bad'));});
+test('orphan assets and evidence rejected',()=>{const d=C.sample();d.assets[0].projectId='missing';assert.throws(()=>C.validate(d),/沒有對應/);});
+test('unsafe and credential-bearing links rejected',()=>{for(const url of ['javascript:alert(1)','data:text/html,test','https://name:password@example.com','file:///private']){const d=C.sample();d.assets[0].url=url;assert.throws(()=>C.validate(d),/連結/);}});
+test('safe HTTPS links accepted without automatic loading',()=>{const d=C.sample();d.assets[0].url='https://example.com/file';assert.ok(C.validate(d));});
+test('delivered requires all located/checked assets AND attributable evidence',()=>{const d=C.sample();d.projects[0].status='已交付';assert.throws(()=>C.validate(d),/已交付/);for(const a of d.assets){a.location='private archive/'+a.name;a.verified=true;}assert.throws(()=>C.validate(d));d.evidence.push({id:'e',projectId:d.projects[0].id,item:'使用者回報可分享',level:'使用者驗收',by:'使用者',date:'2026-10-15',location:'私人對話',url:'',note:'不是收件端檢測',passed:true});assert.equal(C.validate(d).projects[0].status,'已交付');});
+test('merge keeps existing conflicts and unrelated records',()=>{const a=C.sample(),b=clone(a);b.projects[0].name='incoming';const m=C.merge(a,b);assert.equal(m.kept,4);assert.equal(m.data.projects[0].name,a.projects[0].name);});
+test('failed storage does not report or mutate successful data',()=>{const d=C.sample();const before=JSON.stringify(d);assert.throws(()=>C.persist({setItem(){throw Error('QuotaExceeded');}},d),/Quota/);assert.equal(JSON.stringify(d),before);});
+test('corrupt local backup throws instead of resetting silently',()=>assert.throws(()=>C.load({getItem(){return '{broken';}})));
+test('oversize backup rejected before parsing',()=>assert.throws(()=>C.parse(' '.repeat(C.MAX_BYTES+1)),/2 MB/));
+test('prototype recipe keys rejected and unknown root fields dropped',()=>{const d=C.empty();d.surprise='discard';assert.equal(C.validate(d).surprise,undefined);d.recipes=[{id:'r',name:'bad',fields:JSON.parse('{"__proto__":"x"}')}];assert.throws(()=>C.validate(d),/不安全/);});
+test('record count cap checked',()=>{const d=C.empty();d.projects=Array.from({length:501},(_,i)=>({id:String(i)}));assert.throws(()=>C.validate(d),/數量/);});
